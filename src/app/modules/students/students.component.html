@@ -1,0 +1,185 @@
+<nav class="bg-blue-950">
+   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+     <div class="relative flex h-16 items-center justify-between">
+       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+         <div class="sm:ml-6 sm:block">
+           <div class="flex space-x-4">
+             <button (click)="setTabs()"
+                class="text-white rounded-md px-3 py-2 text-sm font-medium"
+                >
+                Listado
+              </button>
+             <button (click)="setTabs(1)"
+              class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+               Trafico
+             </button>
+           </div>
+         </div>
+       </div>
+       <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+         <button type="button" class=" text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+            Salir
+         </button>
+       </div>
+     </div>
+   </div>
+</nav>
+
+<div class="p-2">
+   <div *ngIf="tabs === 0">
+    <h2 class="text-2xl text-blue-950 font-bold">Estudiantes</h2>
+    <div class="my-2">
+      <button (click)="handleOpenModal()" class="w-30 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Agregar Estudiante
+      </button>
+    </div>
+
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+           <tr>
+             <th class="px-6 py-3">Nombre</th>
+             <th class="px-6 py-3">Teléfono</th>
+             <th class="px-6 py-3">Carril</th>
+             <th class="px-6 py-3 flex justify-center">Acciones</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr *ngFor="let item of studentsArray" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+             <td class="px-6 py-4">{{item.nombre}}</td>
+             <td class="px-6 py-4">{{item.telefono}}</td>
+             <td class="px-6 py-4">{{item.carrilDescripcion}}</td>
+             <td class="px-6 py-4 flex justify-center">
+              <button (click)="deleteStudent(item.id)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                </svg>
+              </button>
+             </td>
+           </tr>
+         </tbody>
+       </table>
+   </div>
+
+   <div *ngIf="tabs === 1">
+       <h2 class="text-2xl px-3 py-2 text-blue-950 font-bold">Carril</h2>
+       <div class="flex">
+
+        <button (click)="saveCarril('carrilUno', 'ca1')"  class="inline-flex w-full justify-center rounded-md bg-blue-950 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">
+          Carril 1
+        </button>
+
+        <button (click)="saveCarril('carrilDos', 'ca2')"  class="inline-flex w-full justify-center rounded-md bg-blue-950 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">
+          Carril 2
+        </button>
+
+        <button (click)="saveCarril('carrilTres', 'ca3')"  class="inline-flex w-full justify-center rounded-md bg-blue-950 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">
+          Carril 3
+        </button>
+
+      
+
+       </div>
+
+       <div class="flex">
+
+        <div class="basis-2/6">
+           <h2 class="p-2 m-2 bg-slate-800 text-white">Carril 1</h2>
+           <ul class="p-1 m-2">
+             <li  class="bg-slate-700 p-2 text-white" *ngFor="let item of (studentsArray | carril: 'ca1' )"  >
+              Nombre:  {{ item.nombre }} Telefono: {{item.telefono}}
+             </li>
+          </ul>
+        </div>
+
+        <div class="basis-2/6">
+          <h2 class="p-2 m-2 bg-slate-800 text-white">Carril 2</h2>
+          <ul class="p-1 m-2">
+            <li  class="bg-slate-700 p-2 text-white" *ngFor="let item of (studentsArray | carril: 'ca2' )"  >
+              Nombre: {{ item.nombre }} Telefono: {{item.telefono}}
+            </li>
+         </ul>
+       </div>
+
+       <div class="basis-2/6">
+        <h2 class="p-2 m-2 bg-slate-800 text-white">Carril 3</h2>
+        <ul class="p-1 m-2">
+          <li  class="bg-slate-700 p-2 text-white" *ngFor="let item of (studentsArray | carril: 'ca3' )"  >
+             Nombre: {{ item.nombre }} Telefono: {{item.telefono}}
+          </li>
+       </ul>
+     </div>
+        
+        </div>
+
+
+   </div>
+
+
+</div>
+
+
+<div *ngIf="openModal" class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="false">
+
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+  <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+     
+      <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+        <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+          <div>
+            
+            <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+              <h3 class="text-base m-2 font-semibold leading-6 text-gray-900" id="modal-title">
+                Agrega un usuario
+              </h3>
+              <div class="mt-2">
+                 <form [formGroup]="studentForm">
+                  <div class="border border-slate-700 m-2 rounded">
+                   <input 
+                     placeholder="Nombre"
+                     formControlName="nombre"
+                     class="border-0 w-full p-2 rounded" />
+                  </div>
+
+                  
+                  <div class="border border-slate-700 m-2 rounded">
+                    <input 
+                      placeholder="Telefono"
+                      formControlName="telefono"
+                      class="border-0 w-full p-2 rounded"
+                    />
+
+                   
+                  </div>
+                  <div class="m-2">
+                    <label for="countries" class="block mb-1 text-sm font-medium text-gray-900 ">Carril</label>
+                  <select formControlName="codigoCarril"  aria-placeholder="carril" class="p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full">
+                    <option *ngFor="let item of listCarriles" value={{item.codigo}}>
+                      {{item.descripcion}}
+                    </option>
+                  
+                  </select>
+                </div>
+
+                </form>
+               </div>
+
+
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+          <button (click)="saveStudent()"  class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">
+            Guardar
+          </button>
+          <button (click)="handleOpenModal()" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
