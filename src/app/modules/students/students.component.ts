@@ -134,6 +134,18 @@ export class StudentsComponent implements OnInit{
            ...item
           })
 
+          let mensaje = ''; 
+          list.forEach(x => {
+           mensaje += x.nombre + "se fue en el "+ x.carrilDescripcion + "\n" 
+          })
+
+         Sweet.fire({
+           icon:'success',
+           title:'Mensaje',
+           text:'Ok! ' + mensaje,
+           timer:4000
+         })
+
           setTimeout(() => {
             resolve(true);
           }, 2500);
@@ -154,13 +166,6 @@ export class StudentsComponent implements OnInit{
          await deleteDoc(doc(this.firestore, collectionName, dataDoc.id))
 
         });
-     
-        Sweet.fire({
-          icon:'success',
-          title:'Mensaje',
-          text:'Ok!',
-          timer:4000
-        })
      
     }  
 }

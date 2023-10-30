@@ -81,38 +81,6 @@
 
        </div>
 
-       <div class="flex">
-
-        <div class="basis-2/6">
-           <h2 class="p-2 m-2 bg-slate-800 text-white">Carril 1</h2>
-           <ul class="p-1 m-2">
-             <li  class="bg-slate-700 p-2 text-white" *ngFor="let item of (studentsArray | carril: 'ca1' )"  >
-              Nombre:  {{ item.nombre }} Telefono: {{item.telefono}}
-             </li>
-          </ul>
-        </div>
-
-        <div class="basis-2/6">
-          <h2 class="p-2 m-2 bg-slate-800 text-white">Carril 2</h2>
-          <ul class="p-1 m-2">
-            <li  class="bg-slate-700 p-2 text-white" *ngFor="let item of (studentsArray | carril: 'ca2' )"  >
-              Nombre: {{ item.nombre }} Telefono: {{item.telefono}}
-            </li>
-         </ul>
-       </div>
-
-       <div class="basis-2/6">
-        <h2 class="p-2 m-2 bg-slate-800 text-white">Carril 3</h2>
-        <ul class="p-1 m-2">
-          <li  class="bg-slate-700 p-2 text-white" *ngFor="let item of (studentsArray | carril: 'ca3' )"  >
-             Nombre: {{ item.nombre }} Telefono: {{item.telefono}}
-          </li>
-       </ul>
-     </div>
-        
-        </div>
-
-
    </div>
 
 
