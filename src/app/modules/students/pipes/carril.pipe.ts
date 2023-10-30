@@ -8,7 +8,6 @@ export class CarrilPipe implements PipeTransform {
 
   transform(value:Item[] , ...args: any): Item[] {
 
-    console.log(value, args)
     return value.filter(x => x.codigoCarril === args[0]);
   }
 

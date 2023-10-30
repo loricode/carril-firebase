@@ -41,6 +41,7 @@ export class SignInComponent {
        const data = doc.data() as Usuario
         if(data){
           localStorage.setItem("email", data.correo)
+          localStorage.setItem("auth", JSON.stringify({state:true}))
           this.router.navigate(["students"])
         }
 

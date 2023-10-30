@@ -1,11 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Firestore, doc, getDocs, deleteDoc, addDoc, collection } from '@angular/fire/firestore';
 import { CarrilService } from './services/carril.service';
 import Sweet from 'sweetalert2';
 import { Carril } from './interfaces/carril.interface';
 import { Item } from './interfaces/item.interface';
-
 
 
 @Component({
@@ -31,7 +31,8 @@ export class StudentsComponent implements OnInit{
   studentsArray:Item[] = []
 
   constructor(private fb: FormBuilder,
-    private carrilService: CarrilService 
+    private carrilService: CarrilService,
+    private router: Router
     ){ }
 
   ngOnInit(): void {
@@ -168,4 +169,15 @@ export class StudentsComponent implements OnInit{
         });
      
     }  
+
+
+    cerrarSesion = () => {
+
+      localStorage.removeItem("auth")
+      localStorage.removeItem("email")
+      this.router.navigate([""])
+
+    }
+
+
 }
